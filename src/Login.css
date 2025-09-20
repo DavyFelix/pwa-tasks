@@ -1,0 +1,94 @@
+/* Centraliza a tela */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #4a90e2, #9013fe);
+  font-family: Arial, sans-serif;
+}
+
+/* Card do login */
+.login-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Título */
+.login-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.login-subtitle {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+/* Inputs */
+.login-form input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.login-form input:focus {
+  border: 1px solid #4a90e2;
+}
+
+/* Botão */
+.login-form button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background: #4a90e2;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.login-form button:hover {
+  background: #357abd;
+}
+
+.login-form button:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* Erros */
+.error-text {
+  color: red;
+  margin-top: 1rem;
+}
+
+/* Texto registrar */
+.register-text {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.register-text a {
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
