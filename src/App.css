@@ -7,60 +7,71 @@ body {
   align-items: flex-start;
   min-height: 100vh;
   padding: 40px 20px;
+  color: #333;
 }
 
+/* Card principal */
 .app {
   width: 100%;
-  max-width: 420px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  padding: 24px;
+  max-width: 440px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 28px;
   animation: fadeIn 0.4s ease;
 }
 
+/* Título */
 h1 {
   text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+  color: #2d3748;
+  margin-bottom: 24px;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
+/* Área de input */
 .input-area {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 input {
   flex: 1;
-  padding: 10px;
+  padding: 12px 14px;
   border: 2px solid #ddd;
-  border-radius: 8px;
+  border-radius: 10px;
   outline: none;
-  transition: border 0.2s ease;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+  font-size: 1rem;
 }
 
 input:focus {
   border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
 }
 
+/* Botão de adicionar */
 button {
-  padding: 10px 14px;
+  padding: 12px 16px;
   border: none;
-  background: #667eea;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   color: white;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: 500;
-  transition: background 0.2s ease, transform 0.1s ease;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.1s ease;
 }
 
 button:hover {
-  background: #5a67d8;
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
   transform: scale(1.05);
 }
 
+/* Lista de tarefas */
 .task-list {
-  margin-top: 24px;
+  margin-top: 28px;
   list-style: none;
   padding: 0;
 }
@@ -69,45 +80,64 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 14px;
-  margin-bottom: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
   background: #f9f9f9;
-  border-radius: 10px;
-  transition: background 0.2s ease, transform 0.1s ease;
+  border-radius: 12px;
+  transition: background 0.25s ease, transform 0.15s ease;
+  animation: slideIn 0.3s ease;
 }
 
 .task-list li:hover {
-  background: #f0f0ff;
+  background: #eef2ff;
   transform: translateY(-2px);
 }
 
 .task-list li span {
   flex: 1;
   cursor: pointer;
-  font-size: 15px;
-  color: #333;
+  font-size: 15.5px;
+  color: #2d3748;
+  transition: color 0.25s ease;
 }
 
 .task-list li.done span {
   text-decoration: line-through;
-  color: #888;
+  color: #a0aec0;
+  position: relative;
 }
 
+.task-list li.done span::before {
+  content: "✔";
+  color: #48bb78;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+/* Botão de excluir */
 .task-list li button {
   background: transparent;
   color: #e53e3e;
-  font-size: 18px;
+  font-size: 20px;
   border: none;
   cursor: pointer;
-  padding: 4px;
-  transition: color 0.2s ease;
+  padding: 4px 6px;
+  border-radius: 50%;
+  transition: color 0.25s ease, background 0.25s ease;
 }
 
 .task-list li button:hover {
-  color: #c53030;
+  color: #fff;
+  background: #e53e3e;
 }
 
+/* Animações */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
 }

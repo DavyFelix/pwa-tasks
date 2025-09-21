@@ -5,90 +5,122 @@
   align-items: center;
   height: 100vh;
   background: linear-gradient(135deg, #4a90e2, #9013fe);
-  font-family: Arial, sans-serif;
+  background-size: 200% 200%;
+  animation: gradientAnimation 8s ease infinite;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Card do login */
+/* Animação do gradiente */
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Card do login (Glassmorphism) */
 .login-card {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
   text-align: center;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  animation: fadeIn 1s ease;
+}
+
+/* Fade in suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* Título */
 .login-title {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-  color: #333;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+  color: #fff;
 }
 
 .login-subtitle {
-  color: #666;
-  margin-bottom: 1.5rem;
+  color: #e0e0e0;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+.login-form input::placeholder {
+  color: #fff;
+  opacity: 0.8; /* um pouco mais suave */
 }
 
 /* Inputs */
 .login-form input {
   width: 100%;
-  padding: 0.75rem;
-  margin: 0.5rem 0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 0.9rem;
+  margin: 0.6rem 0;
+  border: none;
+  border-radius: 10px;
   outline: none;
-  transition: border 0.2s;
+  background: #6f5cc5;
+  transition: all 0.3s ease;
+  font-size: 1rem;
 }
 
 .login-form input:focus {
-  border: 1px solid #4a90e2;
+  background: #6f5cc5;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.4);
 }
 
 /* Botão */
 .login-form button {
   width: 100%;
-  padding: 0.75rem;
-  margin-top: 1rem;
-  background: #4a90e2;
+  padding: 0.9rem;
+  margin-top: 1.2rem;
+  background: linear-gradient(135deg, #4a90e2, #9013fe);
   color: white;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: bold;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
 }
 
 .login-form button:hover {
-  background: #357abd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
 }
 
 .login-form button:disabled {
-  background: #aaa;
+  background: #ffffff;
   cursor: not-allowed;
 }
 
 /* Erros */
 .error-text {
-  color: red;
+  color: #ff4d4d;
   margin-top: 1rem;
+  font-weight: bold;
 }
 
 /* Texto registrar */
 .register-text {
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: #555;
+  margin-top: 1.8rem;
+  font-size: 0.95rem;
+  color: #eee;
 }
 
 .register-text a {
-  color: #4a90e2;
+  color: #ffdd57;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
 
 .register-text a:hover {
+  color: #fff176;
   text-decoration: underline;
 }

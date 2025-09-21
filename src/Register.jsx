@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { login as loginWithFirebase } from "./utils/firebase";
+import { register as registerWithFirebase } from "./utils/firebase";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css"; // CSS separado
+import "./Login.css"; // pode reaproveitar o mesmo CSS do login
 
-function Login() {
-  const [form, setForm] = useState({ email: "", password: "" });
+function Register() {
+  const [form, setForm] = useState({ email: "", password: "", confirm: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -13,16 +13,21 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  async function handleLogin(e) {
+  async function handleRegister(e) {
     e.preventDefault();
-    setLoading(true);
     setError("");
 
+    if (form.password !== form.confirm) {
+      setError("As senhas não coincidem");
+      return;
+    }
+
+    setLoading(true);
     try {
-      await loginWithFirebase(form.email, form.password);
-      navigate("/app"); // redireciona sem reload
+      await registerWithFirebase(form.email, form.password);
+      navigate("/app"); // redireciona depois do cadastro
     } catch (err) {
-      setError(err.message || "Erro ao fazer login");
+      setError(err.message || "Erro ao registrar conta");
     } finally {
       setLoading(false);
     }
@@ -31,10 +36,10 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h2 className="login-title">Bem-vindo 👋</h2>
-        <p className="login-subtitle">Entre com sua conta</p>
+        <h2 className="login-title">Criar Conta ✨</h2>
+        <p className="login-subtitle">Preencha os dados abaixo</p>
 
-        <form onSubmit={handleLogin} className="login-form">
+        <form onSubmit={handleRegister} className="login-form">
           <input
             type="email"
             name="email"
@@ -55,19 +60,29 @@ function Login() {
             aria-label="Senha"
           />
 
+          <input
+            type="password"
+            name="confirm"
+            placeholder="Confirmar senha"
+            value={form.confirm}
+            onChange={handleChange}
+            required
+            aria-label="Confirmar senha"
+          />
+
           <button type="submit" disabled={loading}>
-            {loading ? "Entrando..." : "Entrar"}
+            {loading ? "Registrando..." : "Registrar"}
           </button>
         </form>
 
         {error && <p className="error-text">{error}</p>}
 
         <p className="register-text">
-          Não tem conta? <Link to="/register">Registrar</Link>
+          Já tem conta? <Link to="/">Entrar</Link>
         </p>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;
