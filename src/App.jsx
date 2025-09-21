@@ -20,23 +20,54 @@ function App() {
   const [muscleGroup, setMuscleGroup] = useState("Peito");
   const [day, setDay] = useState("");
   const [user, setUser] = useState(null);
+  const [selectedDay, setSelectedDay] = useState("Segunda");
+
   const navigate = useNavigate();
 
-  const muscleOptions = ["Peito", "Costas", "Bíceps", "Tríceps", "Pernas", "Ombros", "Abdômen"];
+  const muscleOptions = [
+    "Peito",
+    "Costas",
+    "Bíceps",
+    "Tríceps",
+    "Pernas",
+    "Ombros",
+    "Abdômen",
+  ];
 
-  // Verifica se usuário está logado
+  const daysOfWeek = [
+    "Segunda",
+    "Terça",
+    "Quarta",
+    "Quinta",
+    "Sexta",
+    "Sábado",
+    "Domingo",
+  ];
+
+  // Rotina semanal sugerida
+  const weeklyRoutine = {
+    Segunda: ["Peito", "Tríceps", "Abdômen"],
+    Terça: ["Costas", "Bíceps", "Abdômen"],
+    Quarta: ["Pernas", "Ombros"],
+    Quinta: ["Peito", "Tríceps", "Abdômen"],
+    Sexta: ["Costas", "Bíceps", "Pernas"],
+    Sábado: ["Ombros", "Abdômen"],
+    Domingo: ["Descanso"],
+  };
+
+  // Autenticação
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
       } else {
-        navigate("/"); // Redireciona para login se não logado
+        navigate("/");
       }
     });
     return unsubscribe;
   }, [navigate]);
 
-  // Carrega os treinos do Firestore
+  // Carrega treinos do Firestore
   useEffect(() => {
     if (!user) return;
 
@@ -49,7 +80,7 @@ function App() {
     return unsubscribe;
   }, [user]);
 
-  // Adicionar treino
+  // Adicionar treino manual
   const addTask = async () => {
     if (!newTask.trim() || !day || !user) return;
 
@@ -71,7 +102,17 @@ function App() {
     }
   };
 
-  // Marcar treino como feito
+  // Adicionar treino sugerido
+  const addSuggestedTask = async (task) => {
+    if (!user) return;
+    try {
+      await addDoc(collection(db, "treinos"), { ...task, uid: user.uid });
+    } catch (err) {
+      console.error("Erro ao adicionar treino sugerido:", err);
+    }
+  };
+
+  // Toggle treino feito
   const toggleTask = async (id, done) => {
     try {
       const taskRef = doc(db, "treinos", id);
@@ -95,7 +136,7 @@ function App() {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      navigate("/"); // Redireciona para login
+      navigate("/");
     } catch (err) {
       console.error("Erro ao deslogar:", err);
     }
@@ -103,11 +144,30 @@ function App() {
 
   if (!user) return <p>Carregando ou usuário não logado...</p>;
 
+  // Gera sugestões do dia
+  const generateRoutine = (day) => {
+    const muscles = weeklyRoutine[day];
+    if (!muscles) return [];
+    return muscles
+      .filter((muscle) => muscle !== "Descanso")
+      .map((muscle, idx) => ({
+        id: `suggested-${day}-${idx}`,
+        text: `Exercício de ${muscle}`,
+        muscleGroup: muscle,
+        day,
+        done: false,
+        suggested: true,
+      }));
+  };
+
   return (
     <div className="app">
+      <button onClick={handleLogout} className="logout-btn">
+        Deslogar
+      </button>
       <h1>🏋️ Treinos Semanais</h1>
-      <button onClick={handleLogout} className="logout-btn">Deslogar</button>
 
+      {/* Adicionar treino manual */}
       <div className="input-area">
         <input
           type="text"
@@ -117,17 +177,55 @@ function App() {
           onKeyDown={(e) => e.key === "Enter" && addTask()}
         />
 
-        <select value={muscleGroup} onChange={(e) => setMuscleGroup(e.target.value)}>
+        <select
+          value={muscleGroup}
+          onChange={(e) => setMuscleGroup(e.target.value)}
+        >
           {muscleOptions.map((muscle) => (
-            <option key={muscle} value={muscle}>{muscle}</option>
+            <option key={muscle} value={muscle}>
+              {muscle}
+            </option>
           ))}
         </select>
 
-        <input type="date" value={day} onChange={(e) => setDay(e.target.value)} />
+        <select value={day} onChange={(e) => setDay(e.target.value)}>
+          <option value="">Escolha o dia</option>
+          {daysOfWeek.map((d) => (
+            <option key={d} value={d}>
+              {d}
+            </option>
+          ))}
+        </select>
 
         <button onClick={addTask}>Adicionar</button>
       </div>
 
+      {/* Sugestões da semana */}
+      <div className="routine-suggestion">
+        <h2>Sugestão de treino</h2>
+        <select
+          value={selectedDay}
+          onChange={(e) => setSelectedDay(e.target.value)}
+        >
+          {daysOfWeek.map((day) => (
+            <option key={day} value={day}>
+              {day}
+            </option>
+          ))}
+        </select>
+
+        <ul className="task-list">
+          {generateRoutine(selectedDay).map((task) => (
+            <li key={task.id} className="suggested">
+              <span>{task.text} — <b>{task.muscleGroup}</b></span>
+              <button onClick={() => addSuggestedTask(task)}>➕</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Lista de treinos do usuário */}
+      <h2>Seus Treinos</h2>
       <ul className="task-list">
         {tasks.map((task) => (
           <li key={task.id} className={task.done ? "done" : ""}>
