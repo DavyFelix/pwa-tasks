@@ -19,8 +19,10 @@ function App() {
   const [newTask, setNewTask] = useState("");
   const [muscleGroup, setMuscleGroup] = useState("Peito");
   const [day, setDay] = useState("");
+  const [weight, setWeight] = useState(""); // novo campo para peso
   const [user, setUser] = useState(null);
   const [selectedDay, setSelectedDay] = useState("Segunda");
+  const [timer, setTimer] = useState(null); // timer de descanso
 
   const navigate = useNavigate();
 
@@ -88,6 +90,7 @@ function App() {
       text: newTask,
       muscleGroup,
       day,
+      weight: weight || null,
       done: false,
       uid: user.uid,
     };
@@ -97,6 +100,7 @@ function App() {
       setNewTask("");
       setDay("");
       setMuscleGroup("Peito");
+      setWeight("");
     } catch (err) {
       console.error("Erro ao adicionar treino:", err);
     }
@@ -116,7 +120,10 @@ function App() {
   const toggleTask = async (id, done) => {
     try {
       const taskRef = doc(db, "treinos", id);
-      await updateDoc(taskRef, { done: !done });
+      await updateDoc(taskRef, {
+        done: !done,
+        finishedAt: !done ? new Date().toISOString() : null, // marca fim do treino
+      });
     } catch (err) {
       console.error("Erro ao atualizar treino:", err);
     }
@@ -130,6 +137,20 @@ function App() {
     } catch (err) {
       console.error("Erro ao deletar treino:", err);
     }
+  };
+
+  // Timer de descanso
+  const startTimer = (seconds) => {
+    setTimer(seconds);
+    const interval = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(interval);
+          return null;
+        }
+        return prev - 1;
+      });
+    }, 1000);
   };
 
   // Logout
@@ -177,6 +198,13 @@ function App() {
           onKeyDown={(e) => e.key === "Enter" && addTask()}
         />
 
+        <input
+          type="number"
+          value={weight}
+          placeholder="Peso (kg)"
+          onChange={(e) => setWeight(e.target.value)}
+        />
+
         <select
           value={muscleGroup}
           onChange={(e) => setMuscleGroup(e.target.value)}
@@ -217,7 +245,9 @@ function App() {
         <ul className="task-list">
           {generateRoutine(selectedDay).map((task) => (
             <li key={task.id} className="suggested">
-              <span>{task.text} — <b>{task.muscleGroup}</b></span>
+              <span>
+                {task.text} — <b>{task.muscleGroup}</b>
+              </span>
               <button onClick={() => addSuggestedTask(task)}>➕</button>
             </li>
           ))}
@@ -230,12 +260,27 @@ function App() {
         {tasks.map((task) => (
           <li key={task.id} className={task.done ? "done" : ""}>
             <span onClick={() => toggleTask(task.id, task.done)}>
-              {task.text} — <b>{task.muscleGroup}</b> ({task.day})
+              {task.text} — <b>{task.muscleGroup}</b> ({task.day}){" "}
+              {task.weight ? `🏋️ ${task.weight}kg` : ""}
             </span>
+            {task.done && task.finishedAt && (
+              <small>
+                ✅ Finalizado em{" "}
+                {new Date(task.finishedAt).toLocaleDateString("pt-BR")}
+              </small>
+            )}
             <button onClick={() => deleteTask(task.id)}>❌</button>
+            <button onClick={() => startTimer(60)}>⏱️ Descanso</button>
           </li>
         ))}
       </ul>
+
+      {/* Timer visível */}
+      {timer !== null && (
+        <div className="timer">
+          ⏳ Descanso: {timer}s
+        </div>
+      )}
     </div>
   );
 }
