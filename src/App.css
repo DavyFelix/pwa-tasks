@@ -15,7 +15,6 @@ body {
   padding: 20px;
 }
 
-/* Container principal */
 .app {
   background: #fff;
   border-radius: 16px;
@@ -26,13 +25,13 @@ body {
   animation: fadeIn 0.6s ease-in-out;
 }
 
-/* Animação suave */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Header */
+
 .header {
   display: flex;
   justify-content: flex-end;
@@ -69,7 +68,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Títulos */
+
 h1 {
   text-align: center;
   margin: 1rem 0 2rem;
@@ -83,7 +82,7 @@ h2 {
   color: #555;
 }
 
-/* Formulário */
+
 .input-area {
   display: flex;
   flex-wrap: wrap;
@@ -125,7 +124,7 @@ h2 {
   opacity: 0.9;
 }
 
-/* Lista */
+
 .task-list {
   list-style: none;
   margin: 0;
@@ -162,7 +161,6 @@ h2 {
   cursor: pointer;
 }
 
-/* Ações */
 .actions {
   display: flex;
   gap: 8px;
@@ -192,7 +190,6 @@ h2 {
   color: #fff;
 }
 
-/* Timer */
 .timer {
   margin-top: 1.5rem;
   text-align: center;
@@ -201,7 +198,6 @@ h2 {
   color: #2b6cb0;
 }
 
-/* Responsivo */
 @media (max-width: 600px) {
   .input-area {
     flex-direction: column;
@@ -213,7 +209,7 @@ h2 {
     width: 100%;
   }
 }
-/* Linha riscada suave */
+
 .task-list li.done span {
   text-decoration: line-through;
   color: #999;
@@ -221,7 +217,7 @@ h2 {
   transition: color 0.3s ease, opacity 0.3s ease, text-decoration 0.3s ease;
 }
 
-/* Treinos sugeridos */
+
 .task-list li.suggested {
   background: #e6f7ff;
   border-left: 4px solid #3182ce;
@@ -232,8 +228,6 @@ h2 {
   transform: scale(1.02);
   background: #d0ebff;
 }
-
-/* Ações com hover mais evidente */
 .actions button:first-child {
   background: #e53e3e;
   color: #fff;
@@ -254,7 +248,7 @@ h2 {
   background: #2f855a;
 }
 
-/* Timer */
+
 .timer {
   margin-top: 1.5rem;
   text-align: center;
@@ -264,12 +258,11 @@ h2 {
   transition: color 0.3s ease;
 }
 
-/* Adicionar transição para a lista toda */
+
 .task-list li {
   transition: background 0.25s ease, transform 0.25s ease;
 }
 
-/* Melhorando a responsividade */
 @media (max-width: 600px) {
   .input-area {
     flex-direction: column;

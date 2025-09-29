@@ -1,14 +1,14 @@
-/* Centraliza a tela */
+
 .login-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+
   font-family: 'Segoe UI', Roboto, sans-serif;
   padding: 20px;
 }
 
-/* Card */
 .login-card {
   background: #fff;
   padding: 2.5rem;
@@ -20,13 +20,13 @@
   animation: fadeIn 0.4s ease;
 }
 
-/* Animação de entrada */
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Títulos */
+
 .login-title {
   font-size: 1.9rem;
   font-weight: bold;
@@ -40,7 +40,7 @@
   font-size: 1rem;
 }
 
-/* Inputs */
+
 .login-form input {
   width: 100%;
   padding: 0.85rem;
@@ -53,15 +53,15 @@
 }
 .login-form input::placeholder {
   color: #fff;
-  opacity: 0.8; /* um pouco mais suave */
+  opacity: 0.8; 
 }
 
 .login-form input:focus {
-  border-color: #667eea; /* roxo/azul mais claro no foco */
+  border-color: #667eea; 
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
 }
 
-/* Botão */
+
 .login-form button {
   width: 100%;
   padding: 0.9rem;
@@ -86,14 +86,12 @@
   cursor: not-allowed;
 }
 
-/* Texto de erro */
 .error-text {
   color: #e53e3e;
   margin-top: 1rem;
   font-weight: 500;
 }
 
-/* Texto registrar/entrar */
 .register-text {
   margin-top: 1.8rem;
   font-size: 0.95rem;

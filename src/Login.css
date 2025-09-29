@@ -9,14 +9,13 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Animação do gradiente */
+
 @keyframes gradientAnimation {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Card do login (Glassmorphism) */
 .login-card {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(12px);
@@ -31,13 +30,11 @@
   animation: fadeIn 1s ease;
 }
 
-/* Fade in suave */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Título */
 .login-title {
   font-size: 2rem;
   font-weight: bold;
@@ -52,10 +49,9 @@
 }
 .login-form input::placeholder {
   color: #fff;
-  opacity: 0.8; /* um pouco mais suave */
+  opacity: 0.8; 
 }
 
-/* Inputs */
 .login-form input {
   width: 100%;
   padding: 0.9rem;
@@ -73,7 +69,7 @@
   box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.4);
 }
 
-/* Botão */
+
 .login-form button {
   width: 100%;
   padding: 0.9rem;
@@ -98,14 +94,14 @@
   cursor: not-allowed;
 }
 
-/* Erros */
+
 .error-text {
   color: #ff4d4d;
   margin-top: 1rem;
   font-weight: bold;
 }
 
-/* Texto registrar */
+
 .register-text {
   margin-top: 1.8rem;
   font-size: 0.95rem;

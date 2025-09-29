@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { logEvent } from "firebase/analytics";
 import "./App.css";
 
-/* ---------------- HEADER ---------------- */
+
 function Header({ onLogout, onProfile }) {
   return (
     <div className="header">
@@ -16,7 +16,7 @@ function Header({ onLogout, onProfile }) {
   );
 }
 
-/* ---------------- FORMULÁRIO ---------------- */
+
 function TaskForm({ newTask, setNewTask, weight, setWeight, muscleGroup, setMuscleGroup, day, setDay, addTask, muscleOptions, daysOfWeek }) {
   return (
     <div className="input-area">
@@ -34,7 +34,7 @@ function TaskForm({ newTask, setNewTask, weight, setWeight, muscleGroup, setMusc
   );
 }
 
-/* ---------------- LISTA DE TREINOS ---------------- */
+
 function TaskList({ tasks, toggleTask, deleteTask, startTimer }) {
   return (
     <>
@@ -55,12 +55,11 @@ function TaskList({ tasks, toggleTask, deleteTask, startTimer }) {
   );
 }
 
-/* ---------------- TIMER ---------------- */
+
 function Timer({ timer }) {
   return <div className="timer">⏳ Descanso: <b>{timer}s</b></div>;
 }
 
-/* ---------------- APP ---------------- */
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -74,7 +73,7 @@ function App() {
   const muscleOptions = ["Peito", "Costas", "Bíceps", "Tríceps", "Pernas", "Ombros", "Abdômen"];
   const daysOfWeek = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"];
 
-  // Autenticação
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
@@ -85,7 +84,7 @@ function App() {
     return unsubscribe;
   }, [navigate]);
 
-  // Carrega treinos do Firestore
+
   useEffect(() => {
     if (!user) return;
     const q = query(collection(db, "treinos"), where("uid", "==", user.uid));

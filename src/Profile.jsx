@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { auth, db, analytics } from "./utils/firebase"; // 🔹 Analytics importado
+import { auth, db, analytics } from "./utils/firebase";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { logEvent } from "firebase/analytics";
 import { useNavigate } from "react-router-dom";
@@ -15,16 +15,14 @@ function Profile() {
 
   const navigate = useNavigate();
 
-  // 🔹 Carregar dados do usuário logado
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
 
-        // Rastreia visualização do perfil
+  
         logEvent(analytics, "view_profile");
 
-        // pega dados extras no Firestore
         const docRef = doc(db, "users", currentUser.uid);
         const snap = await getDoc(docRef);
 
@@ -34,7 +32,7 @@ function Profile() {
           setBio(data.bio || "");
           setPhotoURL(data.photoURL || currentUser.photoURL || "");
         } else {
-          // se não existe, cria doc inicial
+
           await setDoc(docRef, {
             name: currentUser.displayName || "Usuário",
             email: currentUser.email,
@@ -46,7 +44,7 @@ function Profile() {
           setPhotoURL(currentUser.photoURL || "");
         }
       } else {
-        navigate("/"); // Se não logado, vai para login
+        navigate("/"); 
       }
       setLoading(false);
     });
@@ -54,7 +52,6 @@ function Profile() {
     return () => unsubscribe();
   }, [navigate]);
 
-  // 🔹 Salvar dados no Firestore
   async function handleSave(e) {
     e.preventDefault();
     if (!user) return;
@@ -69,7 +66,7 @@ function Profile() {
     setEditMode(false);
     alert("Perfil atualizado!");
 
-    // Rastreia ação de salvar perfil
+
     logEvent(analytics, "save_profile", { nameLength: name.length, bioLength: bio.length });
   }
 
@@ -124,7 +121,7 @@ function Profile() {
               className="cancel-btn"
               onClick={() => {
                 setEditMode(false);
-                logEvent(analytics, "cancel_edit_profile"); // rastreia cancelamento
+                logEvent(analytics, "cancel_edit_profile"); 
               }}
             >
               Cancelar

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { login as loginWithFirebase } from "./utils/firebase";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css"; // CSS separado
+import "./Login.css";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -20,7 +20,7 @@ function Login() {
 
     try {
       await loginWithFirebase(form.email, form.password);
-      navigate("/app"); // redireciona sem reload
+      navigate("/app"); 
     } catch (err) {
       setError(err.message || "Erro ao fazer login");
     } finally {

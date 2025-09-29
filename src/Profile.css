@@ -7,7 +7,7 @@
 
 body {
   font-family: "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(135deg, #6b46c1, #805ad5); /* roxo gradiente */
+  background: linear-gradient(135deg, #6b46c1, #805ad5); 
   color: #333;
   min-height: 100vh;
   display: flex;
@@ -16,14 +16,13 @@ body {
   padding: 20px;
 }
 
-/* Container do Profile */
 .profile-container {
   width: 100%;
   max-width: 500px;
 }
 
 .profile-card {
-  background: #f8f7ff; /* leve lilás */
+  background: #f8f7ff; 
   border-radius: 20px;
   padding: 2.5rem;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
@@ -36,7 +35,7 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Avatar */
+
 .profile-avatar {
   width: 130px;
   height: 130px;
@@ -47,7 +46,6 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Nome, email, bio */
 h2 {
   text-align: center;
   margin-bottom: 0.5rem;
@@ -69,7 +67,7 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-/* Botões */
+
 .edit-btn,
 .back-btn,
 .save-btn,
@@ -126,7 +124,6 @@ h2 {
   transform: scale(1.03);
 }
 
-/* Formulário */
 .profile-form input,
 .profile-form textarea {
   width: 100%;
@@ -145,7 +142,6 @@ h2 {
   outline: none;
 }
 
-/* Toast */
 .toast {
   position: fixed;
   bottom: 20px;
@@ -166,4 +162,40 @@ h2 {
 
 @keyframes fadeOut {
   to { opacity: 0; transform: translateX(100%); }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-btn,
+.logout-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.profile-btn {
+  background: linear-gradient(135deg, #6b46c1, #805ad5);
+  color: white;
+}
+
+.profile-btn:hover {
+  background: linear-gradient(135deg, #805ad5, #9f7aea);
+  transform: scale(1.05);
+}
+
+.logout-btn {
+  background: #d53f8c;
+  color: white;
+}
+
+.logout-btn:hover {
+  background: #b83280;
+  transform: scale(1.05);
 }
