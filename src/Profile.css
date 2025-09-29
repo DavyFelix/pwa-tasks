@@ -1,0 +1,169 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #6b46c1, #805ad5); /* roxo gradiente */
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Container do Profile */
+.profile-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.profile-card {
+  background: #f8f7ff; /* leve lilás */
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  animation: fadeIn 0.6s ease-in-out;
+  border: 2px solid #9f7aea;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Avatar */
+.profile-avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 1rem;
+  border: 4px solid #9f7aea;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Nome, email, bio */
+h2 {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  color: #6b46c1;
+}
+
+.email {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #805ad5;
+  margin-bottom: 1rem;
+}
+
+.bio {
+  text-align: center;
+  font-size: 1rem;
+  color: #4c1d95;
+  margin-bottom: 1.5rem;
+}
+
+/* Botões */
+.edit-btn,
+.back-btn,
+.save-btn,
+.cancel-btn {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.edit-btn {
+  background: linear-gradient(135deg, #6b46c1, #805ad5);
+  color: white;
+}
+
+.edit-btn:hover {
+  background: linear-gradient(135deg, #805ad5, #9f7aea);
+  transform: scale(1.04);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.back-btn {
+  background: #a78bfa;
+  color: white;
+}
+
+.back-btn:hover {
+  background: #9f7aea;
+  transform: scale(1.03);
+}
+
+.save-btn {
+  background: #6b46c1;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #805ad5;
+  transform: scale(1.03);
+}
+
+.cancel-btn {
+  background: #d53f8c;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #b83280;
+  transform: scale(1.03);
+}
+
+/* Formulário */
+.profile-form input,
+.profile-form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  transition: border 0.25s ease, box-shadow 0.25s ease;
+}
+
+.profile-form input:focus,
+.profile-form textarea:focus {
+  border-color: #805ad5;
+  box-shadow: 0 0 0 3px rgba(128, 90, 213, 0.25);
+  outline: none;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #805ad5;
+  color: white;
+  padding: 14px 22px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+  font-weight: 600;
+  animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s forwards;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateX(100%); }
+}

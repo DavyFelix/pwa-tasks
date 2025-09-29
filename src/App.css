@@ -1,51 +1,64 @@
-/* ===========================
-   Body e Layout
-=========================== */
-body {
+/* Reset */
+* {
   margin: 0;
-  font-family: 'Segoe UI', Roboto, sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, sans-serif;
   background: linear-gradient(135deg, #667eea, #764ba2);
   color: #333;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  min-height: 100vh;
-  padding: 40px 20px;
+  padding: 20px;
 }
 
-/* Card principal */
+/* Container principal */
 .app {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 700px;
   width: 100%;
-  max-width: 480px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  padding: 32px;
-  position: relative;
-  animation: fadeIn 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.6s ease-in-out;
 }
 
-/* Título */
-h1 {
-  text-align: center;
-  color: #2d3748;
-  margin-bottom: 24px;
-  font-size: 2rem;
-  font-weight: 700;
+/* Animação suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===========================
-   Botão de Logout
-=========================== */
-.logout-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #e53e3e;
+/* Header */
+.header {
+  display: flex;
+  justify-content: flex-end;
+}
+.profile-btn {
+  background: #3182ce;
   color: white;
   border: none;
   padding: 10px 16px;
-  border-radius: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.1s ease;
+}
+
+.profile-btn:hover {
+  background: #2b6cb0;
+  transform: scale(1.05);
+}
+
+.logout-btn {
+  background: #e53e3e;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   transition: background 0.25s ease, transform 0.1s ease;
@@ -56,142 +69,219 @@ h1 {
   transform: scale(1.05);
 }
 
-/* ===========================
-   Inputs e Select
-=========================== */
+/* Títulos */
+h1 {
+  text-align: center;
+  margin: 1rem 0 2rem;
+  font-size: 2rem;
+  color: #4a4a4a;
+}
+
+h2 {
+  margin: 1.5rem 0 1rem;
+  font-size: 1.4rem;
+  color: #555;
+}
+
+/* Formulário */
 .input-area {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 1.5rem;
 }
 
-.input-area > * {
+.input-area input,
+.input-area select {
   flex: 1;
-  min-width: 120px;
-}
-
-input,
-select,
-input[type="date"] {
-  padding: 12px 14px;
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  outline: none;
-  font-size: 1rem;
+  min-width: 150px;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
   transition: border 0.25s ease, box-shadow 0.25s ease;
-  background: white;
 }
 
-input:focus,
-select:focus,
-input[type="date"]:focus {
+.input-area input:focus,
+.input-area select:focus {
   border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
-  background: white;
-  cursor: text;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
+  outline: none;
 }
 
-/* Botão adicionar */
-button {
-  padding: 12px 16px;
-  border: none;
+.input-area button {
   background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
-  border-radius: 12px;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
-  transition: background 0.25s ease, transform 0.1s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-button:hover {
-  background: linear-gradient(135deg, #5a67d8, #6b46c1);
+.input-area button:hover {
   transform: scale(1.05);
+  opacity: 0.9;
 }
 
-/* ===========================
-   Lista de Treinos
-=========================== */
+/* Lista */
 .task-list {
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 .task-list li {
+  background: #f8f8ff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px;
-  margin-bottom: 14px;
-  background: rgba(255, 255, 255, 0.8);
-  border-left: 5px solid #667eea;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, background 0.2s ease;
+  flex-direction: column;
+  gap: 6px;
+  transition: background 0.25s ease;
 }
 
 .task-list li:hover {
-  transform: translateY(-2px);
-  background: rgba(102, 126, 234, 0.08);
+  background: #f0f0ff;
 }
 
-/* Treinos concluídos */
-.task-list li.done {
-  background: rgba(72, 187, 120, 0.15);
-  border-left: 5px solid #48bb78;
+.task-list li.done span {
   text-decoration: line-through;
-  color: #718096;
+  color: #999;
 }
 
-/* Sugestões da rotina */
 .task-list li.suggested {
-  background: rgba(102, 126, 234, 0.15);
-  border-left: 5px solid #667eea;
+  background: #e6f7ff;
+  border-left: 4px solid #3182ce;
 }
 
-/* Texto das tarefas */
-.task-list li span {
-  flex: 1;
+.task-list span {
   cursor: pointer;
-  font-size: 15.5px;
-  color: #2d3748;
 }
 
-/* Botão de adicionar sugestão ou deletar */
-.task-list li button {
-  background: transparent;
-  color: #e53e3e;
-  font-size: 18px;
+/* Ações */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
   border: none;
-  cursor: pointer;
-  padding: 4px 6px;
-  border-radius: 50%;
-  transition: color 0.25s ease, background 0.25s ease;
-}
-
-.task-list li button:hover {
-  color: white;
-  background: #e53e3e;
-}
-
-/* Botão de adicionar sugestão */
-.task-list li.suggested button {
-  background: #667eea;
-  color: white;
+  padding: 6px 10px;
   border-radius: 6px;
-  padding: 2px 6px;
-  font-size: 14px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: transform 0.1s ease, opacity 0.2s ease;
 }
 
-.task-list li.suggested button:hover {
-  background: #5a67d8;
+.actions button:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
 }
 
-/* ===========================
-   Animações
-=========================== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+.actions button:first-child {
+  background: #e53e3e;
+  color: #fff;
+}
+
+.actions button:last-child {
+  background: #38a169;
+  color: #fff;
+}
+
+/* Timer */
+.timer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2b6cb0;
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .input-area {
+    flex-direction: column;
+  }
+
+  .input-area input,
+  .input-area select,
+  .input-area button {
+    width: 100%;
+  }
+}
+/* Linha riscada suave */
+.task-list li.done span {
+  text-decoration: line-through;
+  color: #999;
+  opacity: 0.7;
+  transition: color 0.3s ease, opacity 0.3s ease, text-decoration 0.3s ease;
+}
+
+/* Treinos sugeridos */
+.task-list li.suggested {
+  background: #e6f7ff;
+  border-left: 4px solid #3182ce;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.task-list li.suggested:hover {
+  transform: scale(1.02);
+  background: #d0ebff;
+}
+
+/* Ações com hover mais evidente */
+.actions button:first-child {
+  background: #e53e3e;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.actions button:first-child:hover {
+  background: #c53030;
+}
+
+.actions button:last-child {
+  background: #38a169;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.actions button:last-child:hover {
+  background: #2f855a;
+}
+
+/* Timer */
+.timer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2b6cb0;
+  transition: color 0.3s ease;
+}
+
+/* Adicionar transição para a lista toda */
+.task-list li {
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+/* Melhorando a responsividade */
+@media (max-width: 600px) {
+  .input-area {
+    flex-direction: column;
+  }
+
+  .input-area input,
+  .input-area select,
+  .input-area button {
+    width: 100%;
+  }
+
+  .task-list li {
+    font-size: 0.95rem;
+  }
 }

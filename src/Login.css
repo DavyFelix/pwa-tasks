@@ -4,7 +4,6 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #4a90e2, #9013fe);
   background-size: 200% 200%;
   animation: gradientAnimation 8s ease infinite;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
