@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { auth, db, analytics } from "./utils/firebase";
+import { auth, db, analytics } from "../utils/firebase";
 import { signOut, onAuthStateChanged } from "firebase/auth";
 import { collection, addDoc, query, where, onSnapshot, doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { logEvent } from "firebase/analytics";
-import "./App.css";
+import "../styles/App.css";
 
 
 function Header({ onLogout, onProfile }) {

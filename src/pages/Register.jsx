@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { register as registerWithFirebase } from "./utils/firebase";
+import { register as registerWithFirebase } from "../utils/firebase";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css"; 
+import "../styles/Login.css"; 
 
 function Register() {
   const [form, setForm] = useState({ email: "", password: "", confirm: "" });
